@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoGeneratorSettingsState">
+    <option name="generateClassComment" value="false" />
+    <option name="generateFieldComment" value="false" />
+    <option name="generateMethodComment" value="false" />
+    <option name="ignoredFields">
+      <set>
+        <option value="" />
+      </set>
+    </option>
+    <option name="moduleName" value="calories-app" />
+    <option name="moduleNameToSettings">
+      <map>
+        <entry key="calories-app">
+          <value>
+            <ModuleSettings>
+              <option name="controllerParentDirectory" value="$PROJECT_DIR$/calories-app/src/main/java" />
+              <option name="dtoParentDirectory" value="$PROJECT_DIR$/calories-app/src/main/java" />
+              <option name="entityPackageName" value="com.khusan.entity" />
+              <option name="entityParentDirectory" value="$PROJECT_DIR$/calories-app/src/main/java" />
+              <option name="mapperXmlParentDirectory" value="D:\git\calories-app\calories-app\src\main\resources" />
+              <option name="repositoryPackageName" value="com.khusan.repo" />
+              <option name="repositoryParentDirectory" value="$PROJECT_DIR$/calories-app/src/main/java" />
+              <option name="serviceParentDirectory" value="$PROJECT_DIR$/calories-app/src/main/java" />
+              <option name="voParentDirectory" value="$PROJECT_DIR$/calories-app/src/main/java" />
+            </ModuleSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="serializable" value="false" />
+    <option name="useJakartaEE" value="true" />
+  </component>
+  <component name="DatabaseSettingsState">
+    <option name="database" value="calories_app" />
+    <option name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+    <option name="driverPath" value="C:\Users\kuei9\.m2\repository\com\mysql\mysql-connector-j\9.4.0\mysql-connector-j-9.4.0.jar" />
+    <option name="url" value="jdbc:mysql://localhost:3306/calories_app?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+  </component>
+</project>

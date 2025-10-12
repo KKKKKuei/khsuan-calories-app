@@ -1,0 +1,41 @@
+meta {
+  name: addNewFood
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://192.168.0.13:8080/api/addNewFood
+  body: json
+  auth: inherit
+}
+
+params:query {
+  : 
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "火腿蛋餅",
+    "servingSize": "1份",
+    "calories": 250,
+    "protein": 15,
+    "carbs": 30,
+    "totalFat": 10,
+    "fiber": 2,
+    "sugar": 5,
+    "saturatedFat": 4,
+    "sodium": 70,
+    "transFat": null,
+    "dataSource": "衛福部食品營養資料庫",
+    "updateAt": "2024-01-15"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
