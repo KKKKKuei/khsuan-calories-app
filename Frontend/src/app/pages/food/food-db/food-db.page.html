@@ -1,0 +1,38 @@
+<ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+
+@for (fd of foodsData; track fd) {
+<div class="food-btn-container">
+    <div style="padding: 10px;" (click)="setOptionClick($event, fd)">
+        <span>{{ fd.name }}</span>
+        <ion-icon style="float: right; font-size: 2rem; margin-left: 10px;" name="caret-down-circle-outline"></ion-icon>
+        @if (fd.favorite == 'Y') {
+        <ion-icon style="float: right; font-size: 2rem; color: red;" name="heart" aria-hidden="true"
+            (click)="clickFavorite(fd)"></ion-icon>
+        } @else {
+        <ion-icon style="float: right; font-size: 2rem; color: red;" name="heart-outline" aria-hidden="true"
+            (click)="clickFavorite(fd)"></ion-icon>
+        }
+        <br>
+        <span class="nutrients-font">熱量: {{fd.calories}}大卡, </span>
+        <span class="nutrients-font">蛋白質: {{fd.protein}}公克, </span>
+    </div>
+</div>
+}
+
+<ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+    <ng-template>
+        <ion-content>
+            <ion-list>
+                @for (mt of allMealType; track mt) {
+                <ion-item [button]="true" [detail]="false" (click)="clickOption(mt, selectedFood)">{{mt}}</ion-item>
+                }
+                <ion-item [button]="true" [detail]="false" (click)="clickCustom(selectedFood)">客製化</ion-item>
+            </ion-list>
+            <div>
+                <div class="nutrients-font">熱量: {{selectedFood.calories}}大卡</div>
+                <div class="nutrients-font">蛋白質: {{selectedFood.protein}}公克</div>
+                <div class="nutrients-font">碳水化合物: {{selectedFood.carbs}}公克</div>
+            </div>
+        </ion-content>
+    </ng-template>
+</ion-popover>

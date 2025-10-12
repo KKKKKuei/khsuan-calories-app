@@ -1,0 +1,7 @@
+{
+  "name": "calories-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

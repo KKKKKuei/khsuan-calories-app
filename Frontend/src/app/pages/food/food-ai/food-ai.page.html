@@ -1,0 +1,17 @@
+<ion-item style="display: flex; padding: 10px 0; ">
+    <ion-input style="flex: 2;" [(ngModel)]="aiFoodName" placeholder="請輸入食物"></ion-input>
+    <ion-input style="flex: 2;" [(ngModel)]="aiServingSize" placeholder="100克,1顆,1份"></ion-input>
+    <ion-button style="flex: 1; min-height: 30px;" (click)="aiBtnClick()" fill="outline" size="default">AI</ion-button>
+</ion-item>
+
+@for (fl of foodList; track foodList) {
+<div class="food-btn-container">
+    <div style="padding: 10px;">
+        <span>{{ fl.name }}</span>
+        <ion-icon style="float: right; font-size: 2rem; margin-left: 10px;" name="caret-down-circle-outline"></ion-icon>
+        <ion-icon style="float: right; font-size: 2rem; color: red;" name="heart" aria-hidden="true"></ion-icon>
+        <br>
+        <span style="font-size: 13px;">蛋白質:{{fl.protein}} 熱量:{{fl.calories}}</span>
+    </div>
+</div>
+}

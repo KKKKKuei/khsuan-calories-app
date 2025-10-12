@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>登入</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input type="email" [(ngModel)]="credentials.email" placeholder="請輸入Email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">密碼</ion-label>
+                <ion-input type="password" [(ngModel)]="credentials.password" placeholder="請輸入密碼"></ion-input>
+            </ion-item>
+
+            <ion-button expand="block" (click)="login()" class="ion-margin-top">
+                登入
+            </ion-button>
+
+            <ion-button expand="block" fill="clear" (click)="goToRegister()">
+                還沒有帳號？點此註冊
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

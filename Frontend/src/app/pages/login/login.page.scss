@@ -1,0 +1,111 @@
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.logo-section {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .logo-icon {
+        font-size: 80px;
+        color: var(--ion-color-primary);
+        margin-bottom: 16px;
+    }
+
+    h2 {
+        margin: 0 0 8px 0;
+        color: var(--ion-color-dark);
+    }
+
+    p {
+        margin: 0;
+        color: var(--ion-color-medium);
+    }
+}
+
+.form-item {
+    margin-bottom: 16px;
+
+    ion-label {
+        font-weight: 500;
+    }
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    ion-item {
+        --min-height: 32px;
+
+        ion-label {
+            font-size: 14px;
+        }
+    }
+}
+
+.login-button {
+    margin: 20px 0;
+    height: 48px;
+    font-weight: 600;
+}
+
+.error-message {
+    text-align: center;
+    margin: 16px 0;
+    padding: 12px;
+    background: var(--ion-color-light);
+    border-radius: 8px;
+
+    ion-icon {
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+}
+
+.register-section {
+    text-align: center;
+    margin: 32px 0;
+
+    p {
+        display: inline;
+        margin-right: 8px;
+        color: var(--ion-color-medium);
+    }
+}
+
+.social-login {
+    text-align: center;
+    margin-top: 40px;
+
+    p {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+
+    ion-button {
+        flex: 1;
+        max-width: 140px;
+    }
+}
+
+// 響應式設計
+@media (max-width: 480px) {
+    .social-buttons {
+        flex-direction: column;
+
+        ion-button {
+            max-width: 100%;
+        }
+    }
+}

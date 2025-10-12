@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-button fill="clear" style="font-size: 1rem;" (click)="ns.navigateBack()">返回</ion-button>
+            {{foodList.mealType}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <ion-item>
+        <ion-button (click)="addNewFoodList()" fill="outline" size="default">新增食物</ion-button>
+        <ion-button id="custom-food" fill="outline" size="default">自訂食物</ion-button>
+        <ion-button id="history-food" fill="outline" size="default">歷史食物</ion-button>
+    </ion-item>
+    <ion-item>
+        <ion-label>名稱</ion-label>
+        <ion-label>份量</ion-label>
+        <ion-label>份數</ion-label>
+    </ion-item>
+    @for (nfl of newFoodList; track $index) {
+    <ion-item>
+        <ion-input placeholder="請輸入..." [(ngModel)]="nfl.foodName"></ion-input>
+        <ion-input placeholder="100克,1顆" [(ngModel)]="nfl.servingSize"></ion-input>
+        <ion-input type="number" placeholder="請輸入..." [(ngModel)]="nfl.servings"></ion-input>
+        <ion-button (click)="removeNewFoodList($index)" fill="outline" size="default">X</ion-button>
+    </ion-item>
+    }
+    <ion-button expand="block" (click)="clickCalcBtn(newFoodList)">計算成分(消耗AI token)</ion-button>
+</ion-content>
+
+
+<ion-popover trigger="custom-food" [dismissOnSelect]="true">
+    <ng-template>
+        <ion-content>
+            <ion-list>
+                <ion-item [button]="true" [detail]="false">Option 1</ion-item>
+                <ion-item [button]="true" [detail]="false">Option 2</ion-item>
+                <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+
+                <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+                    <ng-template>
+                        <ion-content>
+                            <ion-list>
+                                <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+                            </ion-list>
+                        </ion-content>
+                    </ng-template>
+                </ion-popover>
+            </ion-list>
+        </ion-content>
+    </ng-template>
+</ion-popover>
+
+<ion-popover trigger="history-food" [dismissOnSelect]="true">
+    <ng-template>
+        <ion-content>
+            <ion-list>
+                <ion-item [button]="true" [detail]="false">Option 1</ion-item>
+                <ion-item [button]="true" [detail]="false">Option 2</ion-item>
+                <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+
+                <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+                    <ng-template>
+                        <ion-content>
+                            <ion-list>
+                                <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+                            </ion-list>
+                        </ion-content>
+                    </ng-template>
+                </ion-popover>
+            </ion-list>
+        </ion-content>
+    </ng-template>
+</ion-popover>
+
+<ion-toast [isOpen]="toastObj.checkRule.isOpen" [message]="toastObj.checkRule.message"
+    [duration]="toastObj.checkRule.duration" (didDismiss)="toastObj.checkRule.isOpen = false"></ion-toast>

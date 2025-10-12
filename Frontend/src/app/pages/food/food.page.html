@@ -1,0 +1,28 @@
+<ion-segment [value]="foodTabsValue" (ionChange)="onTabsChange($event)">
+    <ion-segment-button value="food-db" content-id="food-db">
+        <ion-label>食物庫</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="food-favorite" content-id="food-favorite">
+        <ion-label>最愛</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="food-custom" content-id="food-custom">
+        <ion-label>自訂</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="food-ai" content-id="food-ai">
+        <ion-label>AI</ion-label>
+    </ion-segment-button>
+</ion-segment>
+<ion-segment-view>
+    <ion-segment-content id="food-db">
+        <app-food-db></app-food-db>
+    </ion-segment-content>
+    <ion-segment-content id="food-favorite">
+        <app-food-favorite></app-food-favorite>
+    </ion-segment-content>
+    <ion-segment-content id="food-custom">
+        <app-food-custom></app-food-custom>
+    </ion-segment-content>
+    <ion-segment-content id="food-ai">
+        <app-food-ai></app-food-ai>
+    </ion-segment-content>
+</ion-segment-view>

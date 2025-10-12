@@ -1,0 +1,33 @@
+<div>
+    {{calorieIntake}} / {{tdee}}
+    <ion-progress-bar [value]="calorieProgress"></ion-progress-bar>
+</div>
+
+
+
+<ion-accordion-group [multiple]="true" [value]="foodList.accordionValue">
+    @for (fl of foodList.meals; track $index) {
+    <ion-accordion [value]="fl.mealType">
+        <ion-item slot="header" color="light">
+            <ion-label>{{fl.mealType}}</ion-label>
+        </ion-item>
+        <div slot="content">
+            <ion-item>
+                <ion-button fill="clear" style="font-size: 1rem;" (click)="addToMeal(fl)">加入食物</ion-button>
+                <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                    <ion-label>熱量{{fl.totalCalories}}/蛋白質{{fl.totalProtein}}</ion-label>
+                </div>
+            </ion-item>
+            @for (fd of fl.foods; track $index) {
+            <ion-item>
+                <ion-label>{{fd.name}}</ion-label>
+                <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                    <ion-label>{{fd.calories}} / {{fd.protein}}</ion-label>
+                </div>
+            </ion-item>
+            }
+
+        </div>
+    </ion-accordion>
+    }
+</ion-accordion-group>

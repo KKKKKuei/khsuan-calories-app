@@ -1,0 +1,9 @@
+{{user.username}}
+
+<ion-toolbar>
+    <ion-toggle [enableOnOffLabels]="true" (ngModel)="paletteToggle" (ionChange)="toggleChange($event)"
+        justify="space-between">
+        設定
+    </ion-toggle>
+    <ion-icon name="moon-outline"></ion-icon>
+</ion-toolbar>
