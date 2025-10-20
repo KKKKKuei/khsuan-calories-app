@@ -17,7 +17,6 @@ import { TabsService } from 'src/app/service/tabs.service';
 export class SettingPage implements OnInit {
 
     constructor(
-        private cms: CommonService
     ) { }
 
 
@@ -27,8 +26,6 @@ export class SettingPage implements OnInit {
     paletteToggle = true;
 
     ngOnInit() {
-        this.user = this.cms.getUser();
-
         //## dark mode
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         this.initializeDarkPalette(prefersDark.matches);

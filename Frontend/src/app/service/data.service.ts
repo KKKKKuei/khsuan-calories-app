@@ -13,6 +13,8 @@ export class DataService {
     public editMealDataSubject = new Subject<any>();
     public userDataSubject = new Subject<any>();
     public favoriteFoodDataSubject = new Subject<any>();
+    public customFoodDataSubject = new Subject<any>();
+    public historyMealsDataSubject = new Subject<any>();
     private _foodListData: any;
     private _CompleteFoodData: any;
     private _MealTypeList: any;

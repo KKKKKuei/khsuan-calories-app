@@ -1,13 +1,44 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>food-custom</ion-title>
-  </ion-toolbar>
-</ion-header>
+@for (f of foods; track $index;) {
+<ion-item style="display: flex; padding: 1px 0; ">
+    <ion-input style="flex: 2;" [label]="f.name" [(ngModel)]="f.value" [placeholder]="f.placeholder"></ion-input>
+</ion-item>
+}
+<ion-button style="flex: 1; min-height: 30px;" (click)="addCustom()" fill="outline" size="default">add custom</ion-button>
+<ion-button style="flex: 1; min-height: 30px;" (click)="clickClean()" fill="outline" size="default">clean</ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">food-custom</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+@for (fd of customFoodsData; track fd) {
+<div class="food-btn-container" style="margin-top: 10px;">
+    <div style="padding: 10px;" (click)="setOptionClick($event, fd)">
+        <span>{{ fd.name }}</span>
+        <ion-icon style="float: right; font-size: 2rem; margin-left: 10px;" name="caret-down-circle-outline"></ion-icon>
+        @if (fd.favorite == 'Y') {
+        <ion-icon style="float: right; font-size: 2rem; color: red;" name="heart" aria-hidden="true"
+            (click)="clickFavorite(fd)"></ion-icon>
+        } @else {
+        <ion-icon style="float: right; font-size: 2rem; color: red;" name="heart-outline" aria-hidden="true"
+            (click)="clickFavorite(fd)"></ion-icon>
+        }
+        <br>
+        <span class="nutrients-font">熱量: {{fd.calories}}大卡, </span>
+        <span class="nutrients-font">蛋白質: {{fd.protein}}公克, </span>
+    </div>
+</div>
+}
+
+<ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+    <ng-template>
+        <ion-content>
+            <ion-list>
+                @for (mt of allMealType; track mt) {
+                <ion-item [button]="true" [detail]="false" (click)="clickMealType(mt, selectedFood)">{{mt}}</ion-item>
+                }
+                <ion-item [button]="true" [detail]="false" (click)="clickCustom(selectedFood)">客製化</ion-item>
+            </ion-list>
+            <div>
+                <div class="nutrients-font">熱量: {{selectedFood.calories}}大卡</div>
+                <div class="nutrients-font">蛋白質: {{selectedFood.protein}}公克</div>
+                <div class="nutrients-font">碳水化合物: {{selectedFood.carbs}}公克</div>
+            </div>
+        </ion-content>
+    </ng-template>
+</ion-popover>

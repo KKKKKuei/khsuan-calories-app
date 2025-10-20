@@ -54,21 +54,22 @@ export class DashboardPage implements OnInit {
                 totalProtein: 0
             },
         ],
-        accordionValue: [],
+        mealTypeList: [],
     };
 
     ngOnInit() {
-        this.user = this.cms.getUser();
 
-        this.hs.getMeal(this.user.id).subscribe({
+        this.hs.getMeal(this.cms.userId).subscribe({
             next: r => {
                 const data: any = r;
+
                 if (data && data.length > 0) {
+                    this.ds.historyMealsDataSubject.next(data);
                     data.forEach((d: any) => {
-                        const todayMeal = this.foodList.meals.filter((m: any) => m.mealType == d.mealType && !this.isSameDay(d.consumedAt));
+                        const todayMeal = this.foodList.meals.filter((m: any) => m.mealType == d.mealType && this.cms.isSameDay(new Date().toString(), d.consumedAt));
                         if (todayMeal.length > 0)
                             todayMeal[0].foods = d.items.map((m: any) => m.foods);
-                    })
+                    });
                 }
 
                 this.foodList.meals.forEach((m: any) => {
@@ -85,7 +86,7 @@ export class DashboardPage implements OnInit {
             }
         })
 
-        this.foodList.accordionValue = this.foodList.meals.map((m: any) => m.mealType);  //default open accordion
+        this.foodList.mealTypeList = this.foodList.meals.map((m: any) => m.mealType);  //default open accordion
 
         this.ds.setMealTypeList(this.foodList.meals.map((m: any) => m.mealType)); //給food頁的 食物option
 
@@ -154,7 +155,7 @@ export class DashboardPage implements OnInit {
         // let arr: any = [];
         // meals.forEach((m: any) => {
         //     arr.push({
-        //         "userId": this.user.id,
+        //         "userId": this.cms.userId,
         //         "mealType": m.mealType,
         //         "consumedAt": formattedDate,
         //         "items": m.foods.forEach((f: any) => {
@@ -176,7 +177,7 @@ export class DashboardPage implements OnInit {
         });
 
         const obj = {
-            "userId": this.user.id,
+            "userId": this.cms.userId,
             "mealType": meal.mealType,
             "consumedAt": formattedDate,
             "items": arr
@@ -193,15 +194,5 @@ export class DashboardPage implements OnInit {
         });
     }
 
-    isSameDay(dateString: string) {
-        const consumedDate = new Date(dateString);
-
-        const today = new Date();
-        const isYearMatch = consumedDate.getFullYear() === today.getFullYear();
-        const isMonthMatch = consumedDate.getMonth() === today.getMonth();
-        const isDateMatch = consumedDate.getDate() === today.getDate();
-
-        return isYearMatch && isMonthMatch && isDateMatch;
-    };
 
 }

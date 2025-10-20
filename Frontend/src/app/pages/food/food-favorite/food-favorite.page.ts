@@ -28,8 +28,7 @@ export class FoodFavoritePage implements OnInit {
     isOpen = false;
 
     ngOnInit() {
-        this.user = this.cms.getUser();
-
+        
         this.ds.favoriteFoodDataSubject.subscribe(a => {
             this.foodsData = a;
             this.favFoodsData = this.foodsData.filter(f => f.favorite == 'Y');
@@ -54,7 +53,7 @@ export class FoodFavoritePage implements OnInit {
 
     }
 
-    clickOption(mealType: string, selectedFood: any) {
+    clickMealType(mealType: string, selectedFood: any) {
         this.isOpen = false;
         this.ds.editMealDataSubject.next({
             "mealType": mealType,
@@ -75,7 +74,7 @@ export class FoodFavoritePage implements OnInit {
 
     clickFavorite(fd: any) {
         const obj = {
-            userId: this.user.id,
+            userId: this.cms.userId,
             foodId: fd.foodId,
         };
 

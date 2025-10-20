@@ -5,7 +5,7 @@
 
 
 
-<ion-accordion-group [multiple]="true" [value]="foodList.accordionValue">
+<ion-accordion-group [multiple]="true" [value]="foodList.mealTypeList">
     @for (fl of foodList.meals; track $index) {
     <ion-accordion [value]="fl.mealType">
         <ion-item slot="header" color="light">

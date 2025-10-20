@@ -33,16 +33,17 @@ export class FoodDbPage implements OnInit, AfterViewInit {
     allMealType: string[] = [];
 
     ngOnInit(): void {
-        this.user = this.cms.getUser();
 
         this.hs.getAllFoods().subscribe({
             next: (data: any) => {
                 this.allFoodsData = data;
                 this.foodsData = this.allFoodsData;
+
+                this.ds.customFoodDataSubject.next(this.foodsData.filter(f => f.createdByUserId == this.cms.userId));
             }
         });
 
-        this.hs.getFavoriteByUser(this.user.id).subscribe({
+        this.hs.getFavoriteByUser(this.cms.userId).subscribe({
             next: (data: any) => {
                 this.favoriteFoods = data.map((d: any) => d.foods);
                 this.favoriteFoods.forEach(a => {
@@ -88,7 +89,7 @@ export class FoodDbPage implements OnInit, AfterViewInit {
 
     }
 
-    clickOption(mealType: string, selectedFood: any) {
+    clickMealType(mealType: string, selectedFood: any) {
         this.isOpen = false;
         this.ds.editMealDataSubject.next({
             "mealType": mealType,
@@ -104,7 +105,7 @@ export class FoodDbPage implements OnInit, AfterViewInit {
 
     clickFavorite(fd: any) {
         const obj = {
-            userId: this.user.id,
+            userId: this.cms.userId,
             foodId: fd.foodId,
         };
 

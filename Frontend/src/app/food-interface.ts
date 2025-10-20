@@ -38,7 +38,7 @@ export interface Meal {
 
 export interface FoodList {
     meals: Meal[];            // 餐點陣列
-    accordionValue: String[];
+    mealTypeList: String[];
 }
 
 export interface WeightLossGoals {

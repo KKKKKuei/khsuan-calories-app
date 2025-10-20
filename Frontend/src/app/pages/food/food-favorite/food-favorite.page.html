@@ -22,7 +22,7 @@
         <ion-content>
             <ion-list>
                 @for (mt of allMealType; track mt) {
-                <ion-item [button]="true" [detail]="false" (click)="clickOption(mt, selectedFood)">{{mt}}</ion-item>
+                <ion-item [button]="true" [detail]="false" (click)="clickMealType(mt, selectedFood)">{{mt}}</ion-item>
                 }
                 <ion-item [button]="true" [detail]="false" (click)="clickCustom(selectedFood)">客製化</ion-item>
             </ion-list>

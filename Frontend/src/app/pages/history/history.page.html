@@ -1,2 +1,31 @@
-<ion-datetime></ion-datetime>
+<ion-item>
+    <ion-datetime presentation="date" [max]="maxDate" [highlightedDates]="highlightedDates" (ionChange)="datetimeChange($event)"></ion-datetime>
+</ion-item>
 
+<ion-accordion-group [multiple]="true" [value]="mealTypeList">
+    @for (ml of selMealList; track $index) {
+    <ion-accordion [value]="ml.mealType">
+        <ion-item slot="header" color="light">
+            <ion-label>{{ml.mealType}}</ion-label>
+        </ion-item>
+        <div slot="content">
+            <ion-item>
+                <!-- <ion-button fill="clear" style="font-size: 1rem;" (click)="addToMeal(fl)">加入食物</ion-button> -->
+                <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                    test
+                    <!-- <ion-label>熱量{{fl.totalCalories}}/蛋白質{{fl.totalProtein}}</ion-label> -->
+                </div>
+            </ion-item>
+            @for (mi of ml.items; track $index) {
+            <ion-item>
+                <ion-label>{{mi.foods.name}}</ion-label>
+                <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                    <ion-label>{{mi.foods.calories}} / {{mi.foods.protein}}</ion-label>
+                </div>
+            </ion-item>
+            }
+
+        </div>
+    </ion-accordion>
+    }
+</ion-accordion-group>
