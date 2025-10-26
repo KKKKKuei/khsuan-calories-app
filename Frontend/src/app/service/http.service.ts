@@ -82,6 +82,15 @@ export class HttpService {
             );
     }
 
+    updateUser(obj: any) {
+        const url = `${this.apiUrl}/user/updateUser`;
+        return this.http.post(url, obj, { headers: this.getHeaders() })
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+
     getMeal(userId: number) {
         const url = `${this.apiUrl}/meals/getMealsByUser`;
         return this.http.post(url, userId, { headers: this.getHeaders() })
@@ -98,7 +107,7 @@ export class HttpService {
             );
     }
 
-    //------------ favorites ---------------
+    //** favorites */
     getFavoriteByUser(userId: number) {
         const url = `${this.apiUrl}/favorites/getFavorite`;
         return this.http.post(url, userId, { headers: this.getHeaders() })
@@ -109,6 +118,31 @@ export class HttpService {
 
     toggleFavorite(obj: any) {
         const url = `${this.apiUrl}/favorites/toggle`;
+        return this.http.post(url, obj, { headers: this.getHeaders() })
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    //** daily-calories */
+    getAllDailyCalories(userId: number) {
+        const url = `${this.apiUrl}/daily-calories/getAllCaloriesByUser`;
+        return this.http.post(url, userId, { headers: this.getHeaders() })
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    calculateTDEE(obj: any) {
+        const url = `${this.apiUrl}/daily-calories/calculateTDEE`;
+        return this.http.post(url, obj, { headers: this.getHeaders() })
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    addDailyCalories(obj: any) {
+        const url = `${this.apiUrl}/daily-calories/save`;
         return this.http.post(url, obj, { headers: this.getHeaders() })
             .pipe(
                 catchError(this.handleError)

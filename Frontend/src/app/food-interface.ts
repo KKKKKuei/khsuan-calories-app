@@ -49,3 +49,10 @@ export interface WeightLossGoals {
     fiberGoal: number;         // 纖維目標 (g)
     waterGoal: number;         // 水分目標 (ml)
 }
+
+//'sedentary', 'light', 'moderate', 'active', 'very_active'
+//久坐	    幾乎不運動（辦公室久坐）
+//輕度	    每週運動 1–3 次	1.375
+//中度	    每週運動 3–5 次	1.55
+//活躍	    幾乎每天運動	1.725
+//非常活躍	    高強度訓練或體力工作	1.9

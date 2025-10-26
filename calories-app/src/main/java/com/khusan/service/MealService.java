@@ -51,8 +51,7 @@ public class MealService {
             }
         }
 
-        return meal;
-//        return mealRepository.save(meal); //[]
+        return mealRepository.save(meal); //[]
     }
 
     @Transactional(readOnly = true)

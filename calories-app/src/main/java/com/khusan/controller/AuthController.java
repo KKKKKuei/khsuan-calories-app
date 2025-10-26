@@ -59,9 +59,7 @@ public class AuthController {
 
             // 生成 token
             String token = jwtUtil.generateToken(user.getEmail(), user.getUserId());
-
-            UserResponse userResponse = new UserResponse(savedUser.getUserId(), savedUser.getEmail(), savedUser.getUsername());
-            AuthResponse authResponse = new AuthResponse(token, userResponse);
+            AuthResponse authResponse = new AuthResponse(token, user);
 
             return ResponseEntity.ok(authResponse);
 
@@ -74,23 +72,6 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
-            // 輸入驗證## MySQL
-            //spring.datasource.url=jdbc:mysql://localhost:3306/calories_app
-            //spring.datasource.username=root
-            //spring.datasource.password=root
-            //
-            //
-            //## ollama AI
-            //ollama.api.url=http://192.168.0.13:11434
-            //
-            //ollama.model=gemma3:1b
-            //#ollama.model=deepseek-r1:8b
-            //
-            //## JWT ??
-            //jwt.secret=mySuperSecretKeyForJWTTokenGenerationInSpringBootApplication
-            //jwt.expiration=86400000
-            //
-            //cors.allowed-origins=http://localhost:8100,http://192.168.0.13:8100
             if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
                 return ResponseEntity.badRequest().body("Email不能為空");
             }
@@ -116,12 +97,8 @@ public class AuthController {
                 return ResponseEntity.badRequest().body("Email或密碼錯誤");
             }
 
-            // 生成 token
             String token = jwtUtil.generateToken(user.getEmail(), user.getUserId());
-
-            // 建立回應
-            UserResponse userResponse = new UserResponse(user.getUserId(), user.getEmail(), user.getUsername());
-            AuthResponse authResponse = new AuthResponse(token, userResponse);
+            AuthResponse authResponse = new AuthResponse(token, user);
 
             return ResponseEntity.ok(authResponse);
 

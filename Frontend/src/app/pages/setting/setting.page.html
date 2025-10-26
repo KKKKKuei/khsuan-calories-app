@@ -1,5 +1,3 @@
-{{user.username}}
-
 <ion-toolbar>
     <ion-toggle [enableOnOffLabels]="true" (ngModel)="paletteToggle" (ionChange)="toggleChange($event)"
         justify="space-between">
@@ -7,3 +5,18 @@
     </ion-toggle>
     <ion-icon name="moon-outline"></ion-icon>
 </ion-toolbar>
+
+<ion-button (click)="clickUpdateUser()">CLICK</ion-button>
+<ion-item>
+    <ion-input [(ngModel)]="username"></ion-input>
+    <ion-input [(ngModel)]="height"></ion-input>
+    <ion-input [(ngModel)]="weight"></ion-input>
+    <ion-input [(ngModel)]="activityLevel"></ion-input>
+    <ion-datetime-button datetime="birth"></ion-datetime-button>
+</ion-item>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="birth" presentation="date" [value]="birthDate" [(ngModel)]="birthDate" (disabled)="showDatePop"></ion-datetime>
+  </ng-template>
+</ion-modal>

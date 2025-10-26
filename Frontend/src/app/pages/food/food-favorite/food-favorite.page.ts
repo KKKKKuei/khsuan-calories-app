@@ -24,7 +24,6 @@ export class FoodFavoritePage implements OnInit {
     allMealType: string[] = [];
     selectedFood: any;
 
-    user: any;
     isOpen = false;
 
     ngOnInit() {
@@ -74,7 +73,7 @@ export class FoodFavoritePage implements OnInit {
 
     clickFavorite(fd: any) {
         const obj = {
-            userId: this.cms.userId,
+            userId: this.cms.user.userId,
             foodId: fd.foodId,
         };
 

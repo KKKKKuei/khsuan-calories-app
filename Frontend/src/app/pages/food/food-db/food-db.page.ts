@@ -25,7 +25,6 @@ export class FoodDbPage implements OnInit, AfterViewInit {
     @ViewChild('popover') popover!: HTMLIonPopoverElement;
 
     isOpen = false;
-    user: any;
     allFoodsData: any[] = [];
     foodsData: any[] = [];
     favoriteFoods: any[] = [];
@@ -39,11 +38,11 @@ export class FoodDbPage implements OnInit, AfterViewInit {
                 this.allFoodsData = data;
                 this.foodsData = this.allFoodsData;
 
-                this.ds.customFoodDataSubject.next(this.foodsData.filter(f => f.createdByUserId == this.cms.userId));
+                this.ds.customFoodDataSubject.next(this.foodsData.filter(f => f.createdByUserId == this.cms.user.userId));
             }
         });
 
-        this.hs.getFavoriteByUser(this.cms.userId).subscribe({
+        this.hs.getFavoriteByUser(this.cms.user.userId).subscribe({
             next: (data: any) => {
                 this.favoriteFoods = data.map((d: any) => d.foods);
                 this.favoriteFoods.forEach(a => {
@@ -105,7 +104,7 @@ export class FoodDbPage implements OnInit, AfterViewInit {
 
     clickFavorite(fd: any) {
         const obj = {
-            userId: this.cms.userId,
+            userId: this.cms.user.userId,
             foodId: fd.foodId,
         };
 

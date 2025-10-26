@@ -8,7 +8,10 @@ export class CommonService {
 
     constructor() { }
 
-    userId: number = JSON.parse(localStorage.getItem('user')!).id;
+
+    //'{"userId":1,"username":"aaa","email":"aaa","createAt":"2025-09-29T14:37:08","height":"170.0","weight":"60.0","activityLevel":"light","gender":"male","birthDate":null}'
+    user: any = JSON.parse(localStorage.getItem('user')!);
+
 
     isSameDay(dayString1: string, dayString2: string) { //判斷consumedAt 回傳是否同一天
         const day1 = new Date(dayString1);

@@ -23,10 +23,9 @@ export class DashboardPage implements OnInit {
         private cms: CommonService
     ) { }
 
-    user: any;
     editTimeout: any = null;
     calorieProgress: number = 0;
-    tdee: number = 1500; //計算熱量赤字
+    tdee: number = 0;
     calorieIntake: number = 0;
 
     foodList: any = {
@@ -58,8 +57,7 @@ export class DashboardPage implements OnInit {
     };
 
     ngOnInit() {
-
-        this.hs.getMeal(this.cms.userId).subscribe({
+        this.hs.getMeal(this.cms.user.userId).subscribe({
             next: r => {
                 const data: any = r;
 
@@ -89,6 +87,13 @@ export class DashboardPage implements OnInit {
         this.foodList.mealTypeList = this.foodList.meals.map((m: any) => m.mealType);  //default open accordion
 
         this.ds.setMealTypeList(this.foodList.meals.map((m: any) => m.mealType)); //給food頁的 食物option
+
+        this.hs.calculateTDEE(this.cms.user).subscribe({ //計算今天的tdee
+            next: (r: any) => {
+                this.tdee = r;
+                this.calcTdeeBar();
+            }
+        })
 
         // this.route.queryParams.subscribe(params => {
         //     // 取得ai傳來的資料
@@ -155,7 +160,7 @@ export class DashboardPage implements OnInit {
         // let arr: any = [];
         // meals.forEach((m: any) => {
         //     arr.push({
-        //         "userId": this.cms.userId,
+        //         "userId": this.cms.user.userId,
         //         "mealType": m.mealType,
         //         "consumedAt": formattedDate,
         //         "items": m.foods.forEach((f: any) => {
@@ -177,7 +182,7 @@ export class DashboardPage implements OnInit {
         });
 
         const obj = {
-            "userId": this.cms.userId,
+            "userId": this.cms.user.userId,
             "mealType": meal.mealType,
             "consumedAt": formattedDate,
             "items": arr
@@ -187,6 +192,20 @@ export class DashboardPage implements OnInit {
         this.hs.editMeal(obj).subscribe({
             next: (response) => {
                 console.log('餐點更新成功', response);
+
+                const obj = {
+                    ...this.cms.user,
+                    recordDate: new Date(),
+                    tdee: this.tdee,
+                    calorieIntake: this.calorieIntake,
+                    calorieBurned: 0,
+                };
+                this.hs.addDailyCalories(obj).subscribe({
+                    next: (r) => {
+                        console.log(r)
+                    }
+                })
+
             },
             error: (error) => {
                 console.error('餐點更新失敗', error);

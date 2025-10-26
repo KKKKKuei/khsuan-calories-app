@@ -1,7 +1,14 @@
 <ion-item>
-    <ion-datetime presentation="date" [max]="maxDate" [highlightedDates]="highlightedDates" (ionChange)="datetimeChange($event)"></ion-datetime>
+    <ion-datetime presentation="date" [max]="todayString" [highlightedDates]="highlightedDates"
+        (ionChange)="datetimeChange($event)"></ion-datetime>
 </ion-item>
 
+@if (showTdeeBar) {
+<div>
+    {{selCalorieIntake}} / {{selTdee}}
+    <ion-progress-bar [value]="calorieProgress"></ion-progress-bar>
+</div>
+}
 <ion-accordion-group [multiple]="true" [value]="mealTypeList">
     @for (ml of selMealList; track $index) {
     <ion-accordion [value]="ml.mealType">

@@ -109,7 +109,7 @@ export class FoodCustomPage implements OnInit {
 
     clickFavorite(fd: any) {
         const obj = {
-            userId: this.cms.userId,
+            userId: this.cms.user.userId,
             foodId: fd.foodId,
         };
 

@@ -1,15 +1,17 @@
 package com.khusan.dto;
 
+import com.khusan.entity.Users;
+
 public class AuthResponse {
 
     private String token;
-    private UserResponse user;
+    private Users user;
     private String message;
 
     // Constructors
     public AuthResponse() {}
 
-    public AuthResponse(String token, UserResponse user) {
+    public AuthResponse(String token, Users user) {
         this.token = token;
         this.user = user;
     }
@@ -22,8 +24,8 @@ public class AuthResponse {
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
 
-    public UserResponse getUser() { return user; }
-    public void setUser(UserResponse user) { this.user = user; }
+    public Users getUser() { return user; }
+    public void setUser(Users user) { this.user = user; }
 
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
