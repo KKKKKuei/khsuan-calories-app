@@ -1,20 +1,21 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonSearchbar, IonItem, IonList, IonIcon, IonPopover, IonContent } from '@ionic/angular/standalone';
+import { IonSearchbar, IonItem, IonList, IonIcon, IonPopover, IonContent, IonRadioGroup, IonRadio, IonAccordionGroup, IonAccordion, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { heart, caretDownCircleOutline, heartOutline } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/service/data.service';
 import { HttpService } from 'src/app/service/http.service';
 import { CommonService } from 'src/app/service/common.service';
+import { values } from 'lodash';
 
 @Component({
     selector: 'app-food-db',
     templateUrl: './food-db.page.html',
     styleUrls: ['./food-db.page.scss'],
     standalone: true,
-    imports: [IonContent, IonPopover, IonIcon, IonList, IonSearchbar, CommonModule, FormsModule, IonItem]
+    imports: [IonLabel, IonAccordion, IonAccordionGroup, IonRadio, IonRadioGroup, IonContent, IonPopover, IonIcon, IonList, IonSearchbar, CommonModule, FormsModule, IonItem]
 })
 export class FoodDbPage implements OnInit, AfterViewInit {
 
@@ -28,8 +29,38 @@ export class FoodDbPage implements OnInit, AfterViewInit {
     allFoodsData: any[] = [];
     foodsData: any[] = [];
     favoriteFoods: any[] = [];
-    selectedFood : any;
+    selectedFood: any;
     allMealType: string[] = [];
+    nutritionalList: any[] = [
+        {
+            id: 1,
+            name: '熱量',
+            value: 'fruit',
+            show: true,
+            color: '#FF0000'
+        },
+        {
+            id: 2,
+            name: '蛋白質',
+            value: 'vegetable',
+            show: true,
+            color: '#BC8F8F'
+        },
+        {
+            id: 3,
+            name: '碳水化合物',
+            value: 'dessert',
+            show: true,
+            color: '#802A2A'
+        },
+        {
+            id: 4,
+            name: '測試',
+            value: 'desdsert',
+            show: false,
+            color: '#A39480'
+        },
+    ];
 
     ngOnInit(): void {
 
@@ -37,6 +68,7 @@ export class FoodDbPage implements OnInit, AfterViewInit {
             next: (data: any) => {
                 this.allFoodsData = data;
                 this.foodsData = this.allFoodsData;
+                console.log(this.foodsData)
 
                 this.ds.customFoodDataSubject.next(this.foodsData.filter(f => f.createdByUserId == this.cms.user.userId));
             }
@@ -113,5 +145,10 @@ export class FoodDbPage implements OnInit, AfterViewInit {
                 fd.favorite = data.message == 'add' ? 'Y' : 'N';
             }
         });
+    }
+
+    nutritionalChange(event: Event, value: any): void {
+        const sel = this.nutritionalList.filter(n => n.value == value)[0];
+        sel.show = !sel.show;
     }
 }

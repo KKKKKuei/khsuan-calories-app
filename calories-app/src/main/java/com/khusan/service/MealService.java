@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ public class MealService {
     FoodsRepository foodsRepository;
 
     @Transactional
-    public Meal editMeal(Integer userId, String mealType, Date consumedAt, List<MealItems> items) {
+    public Meal editMeal(Integer userId, String mealType, LocalDate consumedAt, List<MealItems> items) {
         // 先查是否已存在
         Optional<Meal> existingMealOpt = mealRepository.findByUserIdAndMealTypeAndConsumedAt(userId, mealType, consumedAt);
 

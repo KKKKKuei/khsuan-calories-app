@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class MealRequest {
     private Integer userId;
     private Integer mealId;
     private String mealType;
-    private Date consumedAt;
+    private LocalDate consumedAt;
     private List<MealItemRequest> items;
 }
 

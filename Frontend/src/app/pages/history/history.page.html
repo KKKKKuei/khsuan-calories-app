@@ -1,38 +1,48 @@
-<ion-item>
-    <ion-datetime presentation="date" [max]="todayString" [highlightedDates]="highlightedDates"
-        (ionChange)="datetimeChange($event)"></ion-datetime>
-</ion-item>
-
-@if (showTdeeBar) {
-<div>
-    {{selCalorieIntake}} / {{selTdee}}
-    <ion-progress-bar [value]="calorieProgress"></ion-progress-bar>
-</div>
-}
-<ion-accordion-group [multiple]="true" [value]="mealTypeList">
-    @for (ml of selMealList; track $index) {
-    <ion-accordion [value]="ml.mealType">
-        <ion-item slot="header" color="light">
-            <ion-label>{{ml.mealType}}</ion-label>
+<div style="height: 100%; display: flex; flex-direction: column;">
+    <div>
+        <ion-item>
+            <ion-datetime presentation="date" [max]="todayString" [highlightedDates]="highlightedDates"
+                (ionChange)="datetimeChange($event)"></ion-datetime>
         </ion-item>
-        <div slot="content">
-            <ion-item>
-                <!-- <ion-button fill="clear" style="font-size: 1rem;" (click)="addToMeal(fl)">加入食物</ion-button> -->
-                <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
-                    test
-                    <!-- <ion-label>熱量{{fl.totalCalories}}/蛋白質{{fl.totalProtein}}</ion-label> -->
-                </div>
-            </ion-item>
-            @for (mi of ml.items; track $index) {
-            <ion-item>
-                <ion-label>{{mi.foods.name}}</ion-label>
-                <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
-                    <ion-label>{{mi.foods.calories}} / {{mi.foods.protein}}</ion-label>
-                </div>
-            </ion-item>
-            }
-
+    </div>
+    @if (showTdeeBar) {
+    <div style="flex-grow: 1;">
+        <div>
+            {{selCalorieIntake}} / {{selTdee}}
+            <ion-progress-bar [value]="calorieProgress"></ion-progress-bar>
         </div>
-    </ion-accordion>
+        <ion-accordion-group [multiple]="true" [value]="mealTypeList">
+            @for (ml of selMealList; track $index) {
+            <ion-accordion [value]="ml.mealType">
+                <ion-item slot="header" color="light">
+                    <ion-label>{{ml.mealType}}</ion-label>
+                </ion-item>
+                <div slot="content">
+                    <ion-item>
+                        <!-- <ion-button fill="clear" style="font-size: 1rem;" (click)="addToMeal(fl)">加入食物</ion-button> -->
+                        <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                            test
+                            <!-- <ion-label>熱量{{fl.totalCalories}}/蛋白質{{fl.totalProtein}}</ion-label> -->
+                        </div>
+                    </ion-item>
+                    @for (mi of ml.items; track $index) {
+                    <ion-item>
+                        <ion-label>{{mi.foods.name}}</ion-label>
+                        <div style="display: flex; align-items: center; gap: 16px; margin-left: auto;">
+                            <ion-label>{{mi.foods.calories}} / {{mi.foods.protein}}</ion-label>
+                        </div>
+                    </ion-item>
+                    }
+
+                </div>
+            </ion-accordion>
+            }
+        </ion-accordion-group>
+    </div>
     }
-</ion-accordion-group>
+    @else {
+    <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+        無紀錄
+    </div>
+    }
+</div>

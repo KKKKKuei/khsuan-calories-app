@@ -36,20 +36,38 @@ export class HistoryPage implements OnInit {
 
     ngOnInit() {
         this.setMaxDate();
-        this.hs.getAllDailyCalories(this.cms.user.userId).subscribe({
-            next: (r: any) => {
-                this.allDailyCalories = r;
-                this.setHighlightedDates(this.allDailyCalories);
-                this.datetimeChange(null, true);
-            },
-            error: (e) => {
-
-            }
-        });
+        this.getOrUpdateAllDailyCalories();
 
         this.ds.historyMealsDataSubject.subscribe(r => {
             this.allMealList = r;
             this.datetimeChange(null, true);
+        });
+
+        this.ds.updateDailyForDashboardSubject.subscribe(r => {
+            this.getOrUpdateAllDailyCalories();
+            this.hs.getMeal(this.cms.user.userId).subscribe({
+                next: (r) => {
+                    this.allMealList = r;
+                    this.datetimeChange(null, true);
+                },
+                error: (e) => {
+
+                }
+            });
+        })
+    }
+
+    getOrUpdateAllDailyCalories() {
+        this.hs.getAllDailyCalories(this.cms.user.userId).subscribe({
+            next: (r: any) => {
+                this.allDailyCalories = r;
+                console.log('rrr', this.allDailyCalories)
+                this.setHighlightedDates(this.allDailyCalories);
+                this.datetimeChange(null, true);
+            },
+            error: (e) => {
+                console.log('error', e);
+            }
         });
     }
 

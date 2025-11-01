@@ -1,5 +1,27 @@
 <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
 
+<ion-accordion-group>
+    <ion-accordion>
+        <ion-item slot="header">
+            <ion-label>
+                @for (nl of nutritionalList; track $index) {
+                @if (nl.show) {
+                <span [style]="{'color': nl.color}">{{nl.name}} </span>
+                }
+                }
+            </ion-label>
+        </ion-item>
+        <div slot="content" style="padding: 5px 20px;">
+            @for (nl of nutritionalList; track nl.id) {
+            <ion-radio-group [allowEmptySelection]="true" [value]="nl.show ? nl.value : ''" (ionChange)="nutritionalChange($event, nl.value)">
+                <ion-radio [value]="nl.value">{{nl.name}}</ion-radio><br />
+            </ion-radio-group>
+            }
+        </div>
+    </ion-accordion>
+</ion-accordion-group>
+
+
 @for (fd of foodsData; track fd) {
 <div class="food-btn-container">
     <div style="padding: 10px;" (click)="setOptionClick($event, fd)">
@@ -13,8 +35,11 @@
             (click)="clickFavorite(fd)"></ion-icon>
         }
         <br>
-        <span class="nutrients-font">熱量: {{fd.calories}}大卡, </span>
-        <span class="nutrients-font">蛋白質: {{fd.protein}}公克, </span>
+        <span class="nutrients-font" style="color: #FF0000;">{{fd.calories}}大卡</span>
+        <span> / </span>
+        <span class="nutrients-font" style="color: #BC8F8F;">{{fd.protein}}g</span>
+        <span> / </span>
+        <span class="nutrients-font" style="color: #802A2A;">{{fd.carbs}}g</span>
     </div>
 </div>
 }

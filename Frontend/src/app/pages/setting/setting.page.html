@@ -17,6 +17,6 @@
 
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
-    <ion-datetime id="birth" presentation="date" [value]="birthDate" [(ngModel)]="birthDate" (disabled)="showDatePop"></ion-datetime>
+    <ion-datetime #datetime id="birth" presentation="date" [value]="birthDate" (disabled)="showDatePop" (ionChange)="onDateSelected($event, datetime)"></ion-datetime>
   </ng-template>
 </ion-modal>

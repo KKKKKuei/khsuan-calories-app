@@ -75,4 +75,9 @@ export class SettingPage implements OnInit {
         document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
     }
 
+    async onDateSelected(event: any, datetime: IonDatetime) {
+        this.birthDate = event.detail.value;
+        await datetime.cancel(true);
+    }
+
 }
